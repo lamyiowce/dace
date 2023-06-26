@@ -55,6 +55,17 @@ DACE_CONSTEXPR DACE_HDFI typename std::common_type<T, Ts...>::type max(const T& 
     return (a > max(ts...)) ? a : max(ts...);
 }
 
+#ifdef __CUDACC__
+    DACE_DFI dace::vec<float, 4> max(const dace::vec<float, 4>& a, const dace::vec<float, 4>& b) {
+        dace::vec<float, 4> result;
+        result.x = a.x > b.x ? a.x : b.x;
+        result.y = a.y > b.y ? a.y : b.y;
+        result.z = a.z > b.z ? a.z : b.z;
+        result.w = a.w > b.w ? a.w : b.w;
+        return result;
+    }
+#endif
+
 template <typename T, typename T2>
 static DACE_CONSTEXPR DACE_HDFI T Mod(const T& value, const T2& modulus) {
     return value % modulus;
