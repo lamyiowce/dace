@@ -855,7 +855,7 @@ def unparse_tasklet(sdfg, state_id, dfg, node, function_stream, callsite_stream,
                 )
             else:
                 callsite_stream.write(
-                    '%sStream_t __dace_current_stream = nullptr;' % common.get_gpu_backend(),
+                    'int __dace_current_stream_id = 0;\n%sStream_t __dace_current_stream = nullptr;' % common.get_gpu_backend(),
                     sdfg,
                     state_id,
                     node,
